@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>GUEGUEN Paul Genotyper  </title>
+</head>
+<body>
+
+<h1>Guguenotyper snp 0.1</h1>
+<h4>
+	Coller une liste de snps et cliquer sur get
+</h4>
+
+<textarea id="area" name="Genotype" cols="40" rows="5">
+AA
+TT
+GA
+CC
+TC
+CC
+AC
+</textarea>
+<input type="button" value="get" onclick="convert()">
+<input id="result" type="text">
+
+<script type="text/javascript">
+	function convert()
+	{
+		// key string are ordered 
+		var dict = {
+			"AA" : "A",
+			"CC" : "C",
+			"TT" : "T",
+			"GG" : "G",
+			"AG" : "R",
+			"CT" : "Y",
+			"CG" : "S",
+			"AT" : "W",
+			"GT" : "K",
+			"AC" : "M"
+		}
+		var data = document.getElementById("area").value;
+		var lines = data.split('\n')
+		output = ""
+		for(var i = 0;i < lines.length;i++){
+			raw_gt   = lines[i]
+			order_gt = raw_gt.split("").sort().join("")
+
+			if (order_gt in dict) {
+			output += dict[order_gt]
+			}
+			else {
+				output += "?"
+			}
+
+		}
+		document.getElementById("result").value = output
+	}
+
+
+</script>
+
+
+</body>
+</html>
